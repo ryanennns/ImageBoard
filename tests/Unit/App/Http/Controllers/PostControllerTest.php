@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Tests\TestCase;
+
+class PostControllerTest extends TestCase
+{
+    public function test_it_can_create_posts()
+    {
+        $postContent = 'this is a meme post ! please enjoy this meme';
+        $this->post('posts/', [
+            'content' => $postContent,
+        ])
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'content' => $postContent,
+            ]);
+
+    }
+}
