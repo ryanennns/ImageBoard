@@ -10,11 +10,11 @@ class CommentController extends Controller
     public function store(Post $post, Request $request)
     {
         $request->validate([
-            'body' => 'required',
+            'content' => 'required',
         ]);
 
         $post->comments()->create([
-            'content' => $request->input('body')
+            'content' => $request->input('content')
         ]);
 
         return response()->redirectTo("/posts/$post->id");

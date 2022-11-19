@@ -68,7 +68,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('TESTING_DB_HOST', '127.0.0.1'),
             'port' => env('TESTING_DB_PORT', '3306'),
-            'database' => env('TESTING_DB_DATABASE', 'yikyak-test'),
+            'database' => env('TESTING_DB_DATABASE', 'imageboard_test'),
             'username' => env('TESTING_DB_USERNAME', 'root'),
             'password' => env('TESTING_DB_PASSWORD', ''),
             'unix_socket' => env('TESTING_DB_SOCKET', ''),

@@ -10,12 +10,12 @@ class PostControllerTest extends TestCase
     {
         $postContent = 'this is a meme post ! please enjoy this meme';
         $this->post('posts/', [
+            'title' => 'meme',
             'content' => $postContent,
         ])
             ->assertSuccessful()
             ->assertJsonFragment([
                 'content' => $postContent,
             ]);
-
     }
 }

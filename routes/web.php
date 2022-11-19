@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('posts')->group(function () {
     Route::get('/{post}', \App\Http\Controllers\PostController::class . '@show')
-        ->name('posts.show');
+        ->name('.show');
 
     Route::post('/{post}/comments', \App\Http\Controllers\CommentController::class . '@store')
-        ->name('.posts.comments.store');
+        ->name('.comments.store');
 
     Route::post('/', \App\Http\Controllers\PostController::class . '@store')
-        ->name('posts.store');
+        ->name('.store');
 });
 
 Route::get('/', \App\Http\Controllers\PostController::class . '@index')
