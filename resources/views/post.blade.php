@@ -29,7 +29,7 @@
         <form action="/posts/{{$post->id}}/comments" method="post">
             @csrf
             <textarea
-                name="body"
+                name="content"
                 id="comment"
                 cols="30"
                 rows="10"

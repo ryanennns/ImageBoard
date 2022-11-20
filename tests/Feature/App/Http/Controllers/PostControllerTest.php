@@ -17,5 +17,9 @@ class PostControllerTest extends TestCase
             ->assertJsonFragment([
                 'content' => $postContent,
             ]);
+
+        $this->assertDatabaseHas('posts', [
+            'content' => $postContent,
+        ]);
     }
 }

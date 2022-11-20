@@ -26,3 +26,6 @@ Route::prefix('posts')->group(function () {
 
 Route::get('/', \App\Http\Controllers\PostController::class . '@index')
     ->name('posts.index');
+
+Route::get('/register', \App\Http\Controllers\RegisterController::class . '@create');
+Route::post('/register', \App\Http\Controllers\RegisterController::class . '@store');
