@@ -29,3 +29,21 @@ Route::get('/', \App\Http\Controllers\PostController::class . '@index')
 
 Route::get('/register', \App\Http\Controllers\RegisterController::class . '@create');
 Route::post('/register', \App\Http\Controllers\RegisterController::class . '@store');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', \App\Http\Controllers\SessionController::class . '@index');
+    Route::post('/login', \App\Http\Controllers\SessionController::class . '@create');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::post('/logout', \App\Http\Controllers\SessionController::class . '@destroy');
+});
+
+Route::get('/me', function() {
+    if(auth()->user()) {
+        dd(auth()->user()->attributes);
+    }
+    else {
+        dd("you're not logged in, chief");
+    }
+});
