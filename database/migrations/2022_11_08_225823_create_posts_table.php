@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->references('id')->on('users');
             $table->timestamps();
             $table->string('title');
             $table->text('content');

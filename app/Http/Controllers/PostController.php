@@ -18,14 +18,22 @@ class PostController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $post = Post::query()->create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content')
+        $request->validate([
+            'title' => ['required'],
+            'content' => ['required'],
+            'author_id' => ['required'],
         ]);
+
+        $post = Post::query()->create([
+            'author_id' => $request->input('author_id'),
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+        ]);
+
         return response()->json($post->toArray());
     }
 
-    public function index(Request $request): Response
+    public function index(): Response
     {
         return response()->view('index', [
             'posts' => Post::query()->paginate(10),
