@@ -13,15 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('posts')->group(function () {
+Route::prefix('posts')->name('post')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('/create', \App\Http\Controllers\PostController::class . '@create')
+            ->name('.create');
+        Route::post('/store', \App\Http\Controllers\PostController::class . '@store')
+            ->name('.store');
+    });
+
     Route::get('/{post}', \App\Http\Controllers\PostController::class . '@show')
         ->name('.show');
-
     Route::post('/{post}/comments', \App\Http\Controllers\CommentController::class . '@store')
         ->name('.comments.store');
-
-    Route::post('/', \App\Http\Controllers\PostController::class . '@store')
-        ->name('.store');
 });
 
 Route::get('/', \App\Http\Controllers\PostController::class . '@index')
@@ -30,13 +33,15 @@ Route::get('/', \App\Http\Controllers\PostController::class . '@index')
 Route::get('/register', \App\Http\Controllers\RegisterController::class . '@create');
 Route::post('/register', \App\Http\Controllers\RegisterController::class . '@store');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', \App\Http\Controllers\SessionController::class . '@index');
-    Route::post('/login', \App\Http\Controllers\SessionController::class . '@create');
-});
-
-Route::middleware('auth')->group(function() {
-    Route::post('/logout', \App\Http\Controllers\SessionController::class . '@destroy');
+Route::name('session')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', \App\Http\Controllers\SessionController::class . '@index')
+            ->name('.index');
+        Route::post('/login', \App\Http\Controllers\SessionController::class . '@create')
+            ->name('.create');
+    });
+    Route::post('/logout', \App\Http\Controllers\SessionController::class . '@destroy')
+        ->name('.logout');
 });
 
 Route::get('/me', function() {

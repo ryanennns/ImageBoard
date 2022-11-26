@@ -10,13 +10,15 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'content',
-    ];
+    protected $guarded = [];
 
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function author()
+    {
+        return $this->hasOne('user', 'id');
     }
 }
