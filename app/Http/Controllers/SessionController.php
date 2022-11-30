@@ -9,11 +9,7 @@ class SessionController extends Controller
 {
     public function index() // show login page
     {
-        if(auth()->guest()) {
-            return view('login');
-        }
-
-        return view('profile', auth()->user());
+        return view('login');
     }
 
     public function create(Request $request) // login
@@ -24,13 +20,13 @@ class SessionController extends Controller
         ]);
 
         if (auth()->attempt($attributes)) {
-            return response()->redirectTo('/me');
+            return response()->redirectTo('/');
         }
 
         dd('Login failed --', $attributes);
     }
 
-    public function destroy(): RedirectResponse // logout
+    public function destroy(): RedirectResponse // login
     {
         auth()->logout();
         return response()->redirectTo('/');

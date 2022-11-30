@@ -16,11 +16,6 @@ class PostController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        dd('snickers');
-    }
-
     public function store(Request $request): JsonResponse
     {
         $request->validate([

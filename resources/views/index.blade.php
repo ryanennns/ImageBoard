@@ -18,13 +18,7 @@
             @csrf
             <button type="submit">Logout</button>
         </form>
-        <br>
     @endguest
-    @auth()
-        <div>
-            <a href="/posts/create">Write Post</a>
-        </div>
-    @endauth
     <ul>
         @foreach($posts as $post)
             <li class="underline"><a href="/posts/{{$post->id}}">{{$post->title}}</a></li>

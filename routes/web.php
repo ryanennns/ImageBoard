@@ -25,27 +25,30 @@ Route::prefix('posts')->name('post')->group(function () {
         ->name('.show');
     Route::post('/{post}/comments', \App\Http\Controllers\CommentController::class . '@store')
         ->name('.comments.store');
-
-    Route::get('/', \App\Http\Controllers\PostController::class . '@index')
-        ->name('.index');
 });
 
-
+Route::get('/', \App\Http\Controllers\PostController::class . '@index')
+    ->name('posts.index');
 
 Route::get('/register', \App\Http\Controllers\RegisterController::class . '@create');
 Route::post('/register', \App\Http\Controllers\RegisterController::class . '@store');
 
 Route::name('session')->group(function () {
-    Route::get('/login', \App\Http\Controllers\SessionController::class . '@index')
-        ->name('.index');
     Route::middleware('guest')->group(function () {
+        Route::get('/login', \App\Http\Controllers\SessionController::class . '@index')
+            ->name('.index');
         Route::post('/login', \App\Http\Controllers\SessionController::class . '@create')
             ->name('.create');
     });
-    Route::middleware('auth')->group(function () {
-        Route::post('/logout', \App\Http\Controllers\SessionController::class . '@destroy')
-            ->name('.logout');
-        Route::get('/me', \App\Http\Controllers\SessionController::class . '@index')
-            ->name('.me');
-    });
+    Route::post('/logout', \App\Http\Controllers\SessionController::class . '@destroy')
+        ->name('.logout');
+});
+
+Route::get('/me', function() {
+    if(auth()->user()) {
+        dd(auth()->user()->attributes);
+    }
+    else {
+        dd("you're not logged in, chief");
+    }
 });

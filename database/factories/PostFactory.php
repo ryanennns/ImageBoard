@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,12 +16,9 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $user = User::factory()->create();
-
         return [
             'title' => $this->faker->words(3, true),
             'content' => $this->faker->words($this->faker->numberBetween(3,12), true),
-            'author_id' => $user->id,
         ];
     }
 }
