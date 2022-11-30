@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class CommentControllerTest extends TestCase
 {
-    public function test_it_can_create_posts()
+    public function test_it_can_create_comments_on_posts()
     {
         $comment = 'this is a meme comment';
         $post = Post::factory()->create();

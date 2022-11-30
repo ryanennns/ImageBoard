@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
@@ -17,7 +18,7 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function author()
+    public function author(): HasOne
     {
         return $this->hasOne('user', 'id');
     }
